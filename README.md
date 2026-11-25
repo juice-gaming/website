@@ -32,7 +32,7 @@ Rules, because the privacy policy makes promises about this site:
   `privacy/index.html`. Keep `privacy/` and `delete-account/` consistent: retention periods and
   the deletion steps appear on both.
 - The deletion page must keep naming the app and developer exactly as on the Play listing:
-  **Merge Battles**, developer **juice gaming**. Google Play checks this.
+  **Merge Battles**, developer **Juice Gaming**. Google Play checks this.
 
 ## 🌐 DNS (GoDaddy)
 

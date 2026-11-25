@@ -21,7 +21,7 @@ the manual: files, editing, DNS, and "How this site is built and why".
 - The controller is **Dor Tal, trading as Juice Gaming**, contact `info@juice-gaming.com`. No
   postal address is published. Do not invent one.
 - `delete-account/` must name the app and developer as on the Play listing: **Merge Battles**,
-  **juice gaming**.
+  **Juice Gaming** (the Play developer name since 2026-11-25).
 - Relative links everywhere except `404.html` (root-absolute, because Pages serves it at any depth).
 - **Do not delete `CNAME`.** Pages drops the custom domain without it.
 - Push to `main`. There is no CI, no version and no build.
