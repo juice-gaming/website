@@ -15,6 +15,10 @@ the manual: files, editing, DNS, and "How this site is built and why".
   account, an app-generated device ID, and automatic deletion of guest accounts after 12 months
   without a login. Some of these did not exist when it was written. When one of them changes, the
   policy changes in the same piece of work, and so does the Effective date.
+- **The policy must cover every purpose ticked in Play's Data safety form** (`juice/TASKS.md`
+  T-12). Analytics on purchase records, player IDs and game events is explained under "Testing
+  game settings" (`#testing`), because gameplay configs are A/B-tested on purchases (owner,
+  2026-11-25). Add a purpose to the form only together with the policy text for it.
 - **Values the owner has to confirm** are the retention periods: server logs 30 days, security
   records 12 months, purchase records up to 7 years. They appear on both `privacy/` and
   `delete-account/`, so change both.
