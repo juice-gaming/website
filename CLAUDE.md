@@ -19,6 +19,12 @@ the manual: files, editing, DNS, and "How this site is built and why".
   T-12). Analytics on purchase records, player IDs and game events is explained under "Testing
   game settings" (`#testing`), because gameplay configs are A/B-tested on purchases (owner,
   2026-11-25). Add a purpose to the form only together with the policy text for it.
+- **Account deletion answers (owner, 2026-11-25, `juice/TASKS.md` T-68):** linked accounts never
+  expire; **no deletion on an email alone** — an email gets a reply pointing to Settings → Delete
+  account in the game (reinstall + "Continue with Google" if the game is gone), and web deletion
+  with Sign in with Google comes later; purchase records up to 7 years, anonymised; a banned
+  Google-linked account leaves a one-way hash of its Google ID and the ban reason for 2 years;
+  deletion cannot be undone. Both pages state these; change both together.
 - **Values the owner has to confirm** are the retention periods: server logs 30 days, security
   records 12 months, purchase records up to 7 years. They appear on both `privacy/` and
   `delete-account/`, so change both.
