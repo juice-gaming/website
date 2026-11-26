@@ -26,7 +26,8 @@ the manual: files, editing, DNS, and "How this site is built and why".
   Google-linked account leaves a one-way hash of its Google ID and the ban reason for 2 years;
   deletion cannot be undone. Both pages state these; change both together.
 - **Values the owner has to confirm** are the retention periods: server logs 30 days, security
-  records 12 months, purchase records up to 7 years. They appear on both `privacy/` and
+  records 12 months, purchase records up to 7 years, game events 13 months in Google Cloud (EU),
+  anonymised within 30 days of a deletion (owner, 2026-11-26, T-32; BigQuery partitions 395 days). They appear on both `privacy/` and
   `delete-account/`, so change both.
 - The controller is **Dor Tal, trading as Juice Gaming**, contact `info@juice-gaming.com`. No
   postal address is published. Do not invent one.
