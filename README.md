@@ -5,11 +5,15 @@ Plain static HTML and one CSS file, served by GitHub Pages from the root of `mai
 
 | URL | File | What |
 |---|---|---|
-| `/` | `index.html` | Landing page |
+| `/` | `index.html` | Welcome page: hero with the logo and the slogan, **Our games** (`#games`, Merge Battles), **About us** (`#about`), **Contact** (`#contact`) |
 | `/privacy/` | `privacy/index.html` | Privacy policy (the Play Console privacy policy URL) |
 | `/delete-account/` | `delete-account/index.html` | Account deletion (the Play Console Data safety deletion URL) |
 | any missing path | `404.html` | Not found |
-| — | `style.css` | All styling |
+| — | `style.css` | All styling, including the palette and its contrast table |
+| — | `img/logo-512.png` | The logo, 512 px, transparent. Also the `og:image` (absolute URL, our own domain) and the hero's fallback |
+| — | `img/logo-512.webp`, `img/logo-256.webp` | The hero logo for browsers that take WebP (48 KB and 20 KB instead of 232 KB) |
+| — | `img/logo-96.png` | The header logo, shown at 40 px (5 KB, 256 colours) |
+| — | `img/logo-256.png`, `img/favicon-32.png`, `favicon.ico`, `apple-touch-icon.png` | Logo and icons; `logo-256.png` is no longer referenced by a page and is kept as an asset |
 | — | `CNAME` | The custom domain, `juice-gaming.com`. Do not delete it: Pages drops the domain without it |
 | — | `.nojekyll` | Tells Pages to serve the files as they are, without Jekyll |
 
@@ -96,11 +100,11 @@ public site.
 - **Plain HTML, no build**, like `juice/mocks`. The site is three pages of text that change a
   few times a year. A framework would add a build, a lockfile and a weekly dependency PR for no
   benefit, and its runtime JavaScript would contradict the policy's "no scripts" line.
-- **Brand from `@juice-gaming/design-tokens`.** `style.css` uses the package's variable names
-  and format (`--jg-color-*` RGB channels, `rgb(var(…))`) and the `console` theme's values,
-  including the one primary button: blue-600 with a blue-500 ring at 30%. They are copied rather
-  than installed because there is no build step, and the package is on GitHub Packages behind a
-  token. When the `merge-battles` theme ships, swap the `:root` block.
+- **Palette from the logo, not from `@juice-gaming/design-tokens`.** The site used to copy the
+  tokens' `console` theme (the admin's slate and blue). Since 2026-11-26 every colour is sampled
+  from the logo (see *Design* below); the `console` theme is the admin's look, not the brand's.
+  When the tokens grow a `merge-battles` theme (owner decision D5), it should start from these
+  values, and this file should then take its values from it.
 - **No CI.** The fleet's reusable workflows (`juice-gaming/.github`) are for Node repos with a
   `package.json`; this repo has none, so the weekly dependency sweep skips it by its own rule.
   Pages' built-in `pages-build-deployment` publishes on every push to `main`.
@@ -110,3 +114,65 @@ public site.
   Gaming has none of those, and a static site with no scripts and no forms gets little from those
   headers. Revisit if the site grows a sign-in page (the planned web account deletion with
   "Sign in with Google"). That page will need JavaScript, a backend call and a CSP.
+
+## 🎨 Design
+
+Redesigned 2026-11-26 (owner: "a welcome page and a navigation; the whole website should have the
+same colour palette as the logo"). The slogan is **"Just a gaming company that cares about
+juice."**, kept in the owner's words.
+
+**Layout.** Every page has the same navy header (logo, *Juice Gaming*, and the navigation), and
+the same navy footer (slogan, *Legal*: Privacy policy and Delete account, the contact email, and
+"no cookies, no trackers and no scripts"). The home page is a hero (slogan as the `h1`, the logo,
+two buttons) followed by three sections the navigation links to. `privacy/`, `delete-account/` and
+`404.html` put their `h1` in a cream band and their text in a 44rem column; their wording is
+unchanged, and checking that is a diff of the text inside `<main>` before and after.
+
+**Navigation without JavaScript.** Four links (Home, Games, About, Contact), always visible, which
+wrap under the logo on a phone; they fit on one line at 320 px. There is no hamburger, for two
+reasons: hidden navigation is found roughly half as often as visible navigation (NN/g), and the
+script-free hamburgers (`<details>`, the checkbox hack) are not accessible without script either
+(Cloud Four, Adrian Roselli). If the site grows past about five top-level pages, revisit this.
+Privacy and Delete account live in the footer, where people look for legal pages. The header is
+not sticky, so it never covers a focused element (WCAG 2.2, 2.4.11 Focus Not Obscured).
+
+**Palette.** Sampled from the full-size logo with Pillow; the text colours are the sampled ones
+moved only as far as WCAG 2.2 AA needs. Both schemes are AA, so the site follows
+`prefers-color-scheme`: cream in light, navy in dark. The header, the hero and the footer are
+navy in both. The table of every text/background pair and its ratio is the comment at the top of
+`style.css`; change the colours there and recompute it.
+
+| Token | Value | From the logo |
+|---|---|---|
+| `--navy` | `#0e1530` | The outline |
+| `--orange` | `#ff8e12` | The juice; buttons and accents, never text on cream (2.2:1) |
+| `--orange-deep` | `#b4400c` | Juice, darkened: links and the button edge on cream (5.5:1) |
+| `--red` | `#e3222a` | The straw stripes (hero glow only) |
+| `--yellow` | `#fedc8a` | The highlights; "juice" in the slogan, the focus ring on navy |
+| `--cream` | `#fdf6e9` | The straw's white; text on navy |
+
+**Type.** The system font stack (`system-ui`, then each platform's UI font): no web font, which the
+privacy policy forbids anyway, and no download. Headings are heavy (800) and tight; text is 17 px
+with a line height of 1.6 and a measure of about 70 characters.
+
+**Accessibility.** A skip link, a 3 px focus ring everywhere (navy on cream, yellow on navy, 13:1
+or more), 44 px touch targets in the navigation, one `h1` per page, landmarks, and `alt` text on
+the hero logo only (the header logo sits next to the words *Juice Gaming*, so it is `alt=""`). The
+only motion is the hero glass floating 8 px, and only under `prefers-reduced-motion:
+no-preference`.
+
+**Weight.** The home page is about 60 KB: 2 KB of HTML and 4 KB of CSS gzipped, the 5 KB header
+logo, and a 48 KB WebP hero logo (the 232 KB PNG only where WebP is unsupported). No request
+leaves `juice-gaming.com`.
+
+**Checks.** `npx html-validate index.html 404.html privacy/index.html delete-account/index.html`
+passes with its recommended rules. No page scrolls sideways at 320, 390, 768 or 1440 px.
+
+Sources: NN/g, [Hamburger Menus and Hidden Navigation Hurt UX Metrics](https://www.nngroup.com/articles/hamburger-menus/);
+Cloud Four, [A details element as a burger menu is not accessible](https://cloudfour.com/thinks/a-details-element-as-a-burger-menu-is-not-accessible/);
+Adrian Roselli, [CSS-only Widgets Are Inaccessible](https://adrianroselli.com/2023/03/css-only-widgets-are-inaccessible.html);
+W3C, [What's New in WCAG 2.2](https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/) and
+[Understanding 1.4.11 Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast);
+[Modern Font Stacks](https://modernfontstacks.com/);
+web.dev, [prefers-reduced-motion](https://web.dev/articles/prefers-reduced-motion);
+Game Developer, [Best Practices: Game Websites and Landing Pages](https://www.gamedeveloper.com/game-platforms/best-practices-game-websites-and-landing-pages).

@@ -34,4 +34,15 @@ the manual: files, editing, DNS, and "How this site is built and why".
   **Juice Gaming** (the Play developer name since 2026-11-25).
 - Relative links everywhere except `404.html` (root-absolute, because Pages serves it at any depth).
 - **Do not delete `CNAME`.** Pages drops the custom domain without it.
+- **Every page shares one header and one footer**, copied by hand into each file (there is no
+  build to include them). Changing the navigation or the footer means changing `index.html`,
+  `privacy/index.html`, `delete-account/index.html` and `404.html` together. The navigation is
+  Home, Games, About, Contact (anchors on the home page); Privacy policy and Delete account are in
+  the footer. No hamburger: see README, *Design*.
+- **Colours come from the logo** and live only in `style.css`'s `:root` blocks, with the WCAG
+  contrast of every text/background pair in the comment above them. A new colour pair gets its
+  ratio computed and added there; text must reach 4.5:1 in both schemes. Orange `#ff8e12` is
+  never text on cream.
+- **A layout change must not change the legal wording.** Diff the text inside `<main>` of
+  `privacy/` and `delete-account/` before and after.
 - Push to `main`. There is no CI, no version and no build.
