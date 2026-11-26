@@ -8,6 +8,7 @@ Plain static HTML and one CSS file, served by GitHub Pages from the root of `mai
 | `/` | `index.html` | Welcome page: hero with the logo and the slogan, **Our games** (`#games`, Merge Battles), **About us** (`#about`), **Contact** (`#contact`) |
 | `/privacy/` | `privacy/index.html` | Privacy policy (the Play Console privacy policy URL) |
 | `/delete-account/` | `delete-account/index.html` | Account deletion (the Play Console Data safety deletion URL) |
+| `/accessibility/` | `accessibility/index.html` | Accessibility statement (הצהרת נגישות), Hebrew and English |
 | any missing path | `404.html` | Not found |
 | — | `style.css` | All styling, including the palette and its contrast table |
 | — | `img/logo-512.png` | The logo, 512 px, transparent. Also the `og:image` (absolute URL, our own domain) and the hero's fallback |
