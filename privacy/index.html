@@ -21,7 +21,7 @@
 <main>
   <div class="wrap">
     <h1>Merge Battles Privacy Policy</h1>
-    <p class="meta">Effective date: 25 November 2026</p>
+    <p class="meta">Effective date: 26 November 2026</p>
 
     <p>This policy explains what data the game <strong>Merge Battles</strong> collects, why, who
     else receives it, how long it is kept, and how you can delete it.</p>
@@ -107,7 +107,15 @@
     receive it:</p>
     <ul>
       <li><strong>Service providers</strong> who host and run our servers and store data for us.
-      They process data only on our instructions and may not use it for their own purposes.</li>
+      They process data only on our instructions and may not use it for their own purposes:
+        <ul>
+          <li><strong>Amazon Web Services</strong> runs our servers
+          and databases and stores their backups, in its Stockholm region (Sweden, EU).</li>
+          <li><strong>Grafana Labs</strong> (Grafana Cloud) receives our server logs and
+          performance measurements so we can find faults and keep the game running, in its Sweden
+          region (EU). The logs it receives include IP addresses and player IDs.</li>
+        </ul>
+      </li>
       <li><strong>Google</strong>, through Google Play services: Google Play distributes the game
       and handles purchases (Google Play Billing), and Google sign-in signs you in if you choose
       it. What Google collects is covered by
@@ -116,9 +124,10 @@
     </ul>
     <p>During a match, your opponent's app receives your player ID as part of the match data. The
     game does not display it.</p>
-    <p>Our servers and service providers may be located outside your country. Where the law
-    requires it, we use safeguards such as the European Commission's standard contractual clauses
-    for those transfers.</p>
+    <p>Our servers and the data they hold are in the European Union (Sweden). Some of our service
+    providers are companies based outside your country. Where the law requires it, we use
+    safeguards such as the European Commission's standard contractual clauses for those
+    transfers.</p>
 
     <h2 id="security">Security</h2>
     <p>Traffic between the app and our servers is encrypted (HTTPS and secure WebSockets). The
@@ -137,7 +146,11 @@
       done.</li>
       <li><strong>Inactive guest accounts</strong>: a guest account (not linked to Google) that has
       not signed in for 12 months is deleted automatically, with its game data.</li>
-      <li><strong>Server logs</strong>: 30 days, then deleted.</li>
+      <li><strong>Server logs</strong>: up to 30 days, then deleted. The copy our monitoring
+      provider (Grafana Labs) holds is deleted after 14 days.</li>
+      <li><strong>Backups</strong>: copies of our databases are kept for 30 days and then deleted.
+      Data you delete also disappears from the backups when they expire, so at most 30 days after
+      it was deleted from the game.</li>
       <li><strong>Security records</strong>, such as records of administrative actions taken on an
       account: up to 12 months, to prevent fraud and abuse.</li>
       <li><strong>Bans</strong>: if an account linked to Google was banned, a one-way hash of the
