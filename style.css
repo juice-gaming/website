@@ -130,9 +130,12 @@ a:hover { text-decoration-thickness: 2px; }
 .skip:focus { top: 12px; outline-color: var(--navy); }
 
 /* ---------- Header and navigation ----------
-   Navy in both schemes, like the logo's outline. The navigation is always visible and wraps
-   onto a second line on narrow screens: four links do not need a hamburger, and a hidden menu
-   is found less often (NN/g) and would need JavaScript to be accessible. */
+   Navy in both schemes, like the logo's outline. Wide screens: the four links are always
+   visible. Narrow screens (owner, 2026-11-26): a "Menu" button — a native <details>/<summary>,
+   so it needs no JavaScript (the site loads none), works with the keyboard (Enter/Space) and
+   announces expanded/collapsed. Icon only (owner: the hamburger is understood); its accessible
+   name "Menu" is in a visually hidden span. The two navs never show together, so
+   assistive technology always finds exactly one "Main" navigation. */
 
 .site-header { background: var(--navy); color: var(--cream); }
 .site-header .wrap {
@@ -158,6 +161,38 @@ a:hover { text-decoration-thickness: 2px; }
 .site-nav a:hover { color: var(--yellow); }
 .site-nav a[aria-current="page"] { border-bottom-color: var(--orange); }
 
+.nav-menu { display: none; }
+.nav-menu > summary {
+  display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+  border: 2px solid rgb(253 246 233 / 0.35); border-radius: 12px; cursor: pointer;
+  color: var(--cream); font-weight: 700; list-style: none; user-select: none;
+}
+.nav-menu > summary::-webkit-details-marker { display: none; }
+.nav-menu > summary:hover { border-color: var(--yellow); color: var(--yellow); }
+.nav-menu > summary:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.nav-menu[open] > summary { background: rgb(253 246 233 / 0.1); border-color: var(--orange); }
+.nav-menu-list ul { list-style: none; margin: 0; padding: 6px 0 2px; }
+.nav-menu-list li { margin: 0; border-top: 1px solid rgb(253 246 233 / 0.12); }
+.nav-menu-list a {
+  display: block; padding: 13px 4px; color: var(--cream); text-decoration: none;
+  font-weight: 650; font-size: 1.05rem;
+}
+.nav-menu-list a:hover { color: var(--yellow); }
+.nav-menu-list a[aria-current="page"] { color: var(--yellow); }
+.nav-menu-list a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+.site-header { position: relative; }
+.nav-menu-list {
+  position: absolute; left: 0; right: 0; top: 100%; z-index: 20;
+  background: var(--navy); padding: 0 16px 12px;
+  border-bottom: 3px solid var(--orange); box-shadow: 0 12px 24px rgb(0 0 0 / 0.35);
+}
+
+@media (max-width: 640px) {
+  .site-nav { display: none; }
+  .nav-menu { display: block; }
+}
+
 /* ---------- Hero (home page) ---------- */
 
 .hero {
@@ -182,6 +217,16 @@ a:hover { text-decoration-thickness: 2px; }
 .hero h1 .juice { color: var(--yellow); }
 .hero .lead { color: var(--mist); font-size: 1.15rem; max-width: 36rem; margin-bottom: 1.6rem; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+/* Phones: keep the two hero buttons side by side (owner, 2026-11-26) — tighter padding and no
+   line breaks inside a label; a smaller size below 360 px keeps them on one row down to 320 px. */
+@media (max-width: 640px) {
+  .actions { gap: 10px; }
+  .actions .button { padding: 10px 16px; font-size: 0.95rem; white-space: nowrap; flex: 0 0 auto; }
+}
+@media (max-width: 359px) {
+  .actions { gap: 8px; }
+  .actions .button { padding: 10px 12px; font-size: 0.88rem; }
+}
 
 @media (min-width: 52rem) {
   .hero .wrap { grid-template-columns: 1.3fr 1fr; gap: 32px; padding-top: 56px; padding-bottom: 80px; }
@@ -310,3 +355,9 @@ th { background: var(--sunken); }
 .site-footer a:hover { color: var(--yellow); }
 .site-footer .slogan { color: var(--cream); font-weight: 700; }
 .site-footer .small { font-size: 0.88rem; }
+
+/* Text for screen readers only (accessible names of icon-only controls). */
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
