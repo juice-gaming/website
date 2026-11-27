@@ -35,6 +35,7 @@ the manual: files, editing, DNS, and "How this site is built and why".
   **Juice Gaming** (the Play developer name since 2026-11-25).
 - Relative links everywhere except `404.html` (root-absolute, because Pages serves it at any depth).
 - **Do not delete `CNAME`.** Pages drops the custom domain without it.
+- **`oidc/staging/` is the staging cluster's OIDC issuer** (`.well-known/openid-configuration` + `jwks.json`, public keys only; AWS reads it to trust a pod's token, 2026-11-27). Change it only with `juice/infra` (the k3s signing key, `gcp/k3s-staging-jwks.json`), and keep `.nojekyll`, or the dot-folder is not served.
 - **Every page shares one header and one footer**, copied by hand into each file (there is no
   build to include them). Changing the navigation or the footer means changing `index.html`,
   `privacy/index.html`, `delete-account/index.html`, `accessibility/index.html` and `404.html`
